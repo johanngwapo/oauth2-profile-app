@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 70px;
+    }
+    img {
+      border-radius: 50%;
+      margin-top: 20px;
+    }
+    form {
+      margin-top: 20px;
+    }
+    input, textarea {
+      display: block;
+      margin-bottom: 10px;
+      width: 250px;
+      padding: 5px;
+    }
+    button {
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+    .provider {
+      margin-top: 15px;
+      font-size: 0.9em;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+  <h2 th:text="'Hello, ' + ${user.displayName} + '!'"></h2>
+  <img th:src="${user.avatarUrl}" width="100" alt="Profile Picture"><br>
+  <p>Email: <span th:text="${user.email}"></span></p>
+
+  <form method="post" action="/profile">
+    <label>Display Name:</label>
+    <input type="text" name="displayName" th:value="${user.displayName}">
+    
+    <label>Bio:</label>
+    <textarea name="bio" rows="3" th:text="${user.bio}"></textarea>
+    
+    <button type="submit">Update</button>
+  </form>
+
+  <div class="provider" th:text="'Logged in via ' + ${provider}"></div>
+  <br>
+  <a href="/logout">Logout</a>
+</body>
+</html>
+
